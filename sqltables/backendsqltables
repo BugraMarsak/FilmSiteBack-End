@@ -1,0 +1,81 @@
+CREATE TABLE [dbo].[Artists] (
+    [ArtistId] INT             IDENTITY (1, 1) NOT NULL,
+    [FullName] NVARCHAR (80)   NOT NULL,
+    [Photo]    NVARCHAR (200)  NOT NULL,
+    [History]  NVARCHAR (1000) NOT NULL,
+    PRIMARY KEY CLUSTERED ([ArtistId] ASC)
+);
+
+
+CREATE TABLE [dbo].[Comments] (
+    [CommentId] INT             IDENTITY (1, 1) NOT NULL,
+    [UserId]    INT             NOT NULL,
+    [MovieId]   INT             NOT NULL,
+    [Remark]    NVARCHAR (1000) NULL,
+    [Rate]      INT             NULL,
+    [UserName]  NVARCHAR (100)  NOT NULL,
+    PRIMARY KEY CLUSTERED ([CommentId] ASC)
+);
+
+
+CREATE TABLE [dbo].[GenreOfMovies] (
+    [GenreOfMovieId] INT IDENTITY (1, 1) NOT NULL,
+    [MovieId]        INT NOT NULL,
+    [MovieTypeId]    INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([GenreOfMovieId] ASC)
+);
+
+
+CREATE TABLE [dbo].[MovieAndArtists] (
+    [MovieAndArtistId] INT IDENTITY (1, 1) NOT NULL,
+    [MovieId]          INT NOT NULL,
+    [ArtistId]         INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([MovieAndArtistId] ASC)
+);
+
+
+CREATE TABLE [dbo].[Movies] (
+    [MovieId]      INT             IDENTITY (1, 1) NOT NULL,
+    [CoverImage]   NVARCHAR (400)  NOT NULL,
+    [MovieName]    NVARCHAR (100)  NOT NULL,
+    [DirectorName] NVARCHAR (80)   NOT NULL,
+    [ReleaseDate]  INT             NOT NULL,
+    [explanation]  NVARCHAR (1000) NOT NULL,
+    PRIMARY KEY CLUSTERED ([MovieId] ASC)
+);
+
+
+
+CREATE TABLE [dbo].[MovieTypes] (
+    [MovieTypeId]   INT           IDENTITY (1, 1) NOT NULL,
+    [MovieTypeName] NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([MovieTypeId] ASC)
+);
+
+
+CREATE TABLE [dbo].[Users] (
+    [Id]           INT             IDENTITY (1, 1) NOT NULL,
+    [FirstName]    VARCHAR (50)    NOT NULL,
+    [LastName]     VARCHAR (50)    NOT NULL,
+    [Email]        VARCHAR (50)    NOT NULL,
+    [PasswordHash] VARBINARY (500) NOT NULL,
+    [PasswordSalt] VARBINARY (500) NOT NULL,
+    [Status]       BIT             NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE TABLE [dbo].[OperationClaims] (
+    [Id]   INT            IDENTITY (1, 1) NOT NULL,
+    [Name] NVARCHAR (250) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE TABLE [dbo].[UserOperationClaims] (
+    [Id]               INT IDENTITY (1, 1) NOT NULL,
+    [UserId]           INT NOT NULL,
+    [OperationClaimId] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
